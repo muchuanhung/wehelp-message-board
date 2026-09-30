@@ -1,2 +1,5 @@
 fastapi==0.142.1
 uvicorn[standard]==0.54.0
+pymysql==1.1.1
+boto3==1.40.4
+python-multipart==0.0.20
