@@ -3,7 +3,7 @@ from functools import lru_cache
 
 from pydantic import BaseModel
 
-
+# 定義設定模型
 class Settings(BaseModel):
     aws_access_key_id: str
     aws_secret_access_key: str
@@ -12,7 +12,7 @@ class Settings(BaseModel):
     cloudfront_domain: str
     database_url: str
 
-
+# 使用 lru_cache 來快取設定，避免每次都重新讀取環境變數
 @lru_cache
 def get_settings() -> Settings:
     missing = [

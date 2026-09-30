@@ -1,18 +1,3 @@
-:root {
-  --bg: #f3efe6;
-  --ink: #1c2420;
-  --muted: #5d6a63;
-  --panel: rgba(255, 252, 246, 0.88);
-  --line: rgba(28, 36, 32, 0.12);
-  --accent: #0f6a56;
-  --accent-ink: #f7fff9;
-  --danger: #9b2c2c;
-  --shadow: 0 18px 40px rgba(28, 36, 32, 0.08);
-  --radius: 18px;
-  --font-body: "Manrope", sans-serif;
-  --font-display: "Fraunces", serif;
-}
-
 * {
   box-sizing: border-box;
 }
@@ -20,108 +5,57 @@
 body {
   margin: 0;
   min-height: 100vh;
-  color: var(--ink);
-  font-family: var(--font-body);
-  background:
-    radial-gradient(circle at top left, rgba(15, 106, 86, 0.16), transparent 34%),
-    linear-gradient(180deg, #f7f3ea 0%, #e8efe9 100%);
+  background: #fff;
+  color: #111;
+  font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
-.page {
-  width: min(920px, calc(100% - 2rem));
-  margin: 0 auto;
-  padding: 3rem 0 4rem;
+.board {
+  width: min(720px, calc(100% - 2rem));
+  min-height: calc(100vh - 2rem);
+  margin: 1rem auto;
+  padding: 1.25rem 1.5rem 2rem;
+  border: 1px solid #999;
+  background: #fff;
 }
 
-.hero {
-  margin-bottom: 2rem;
-}
-
-.eyebrow {
-  margin: 0 0 0.6rem;
-  color: var(--accent);
-  font-size: 0.85rem;
+h1 {
+  margin: 0 0 1rem;
+  font-size: 1.35rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.hero h1,
-.composer h2,
-.feed-head h2 {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: -0.03em;
-}
-
-.hero h1 {
-  font-size: clamp(2.4rem, 6vw, 4rem);
-  line-height: 1.05;
-}
-
-.lede,
-.muted {
-  color: var(--muted);
-}
-
-.lede {
-  max-width: 36rem;
-  margin: 0.9rem 0 0;
-  font-size: 1.05rem;
-  line-height: 1.6;
-}
-
-.composer,
-.message-card {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(10px);
-}
-
-.composer {
-  padding: 1.4rem;
-  margin-bottom: 2rem;
-}
-
-.composer h2 {
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
 }
 
 .field {
-  display: grid;
-  gap: 0.45rem;
-  margin-bottom: 1rem;
-  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
 }
 
-textarea,
-input[type="file"],
-button {
+.field label {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.field input[type="text"] {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid #767676;
   font: inherit;
 }
 
-textarea {
-  width: 100%;
-  padding: 0.9rem 1rem;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  resize: vertical;
-  background: #fff;
-  color: var(--ink);
+.field input[type="file"] {
+  flex: 1 1 auto;
+  min-width: 0;
+  font: inherit;
 }
 
 button {
-  appearance: none;
-  border: 0;
-  border-radius: 999px;
-  padding: 0.85rem 1.4rem;
-  background: var(--accent);
-  color: var(--accent-ink);
-  font-weight: 700;
+  font: inherit;
+  padding: 0.2rem 0.75rem;
   cursor: pointer;
 }
 
@@ -131,70 +65,65 @@ button:disabled {
 }
 
 .error {
-  margin: 0 0 0.9rem;
-  color: var(--danger);
-  font-weight: 600;
+  margin: 0 0 0.75rem;
+  color: #b00020;
 }
 
-.feed-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 1rem;
+.status {
+  margin: 0 0 0.75rem;
+  color: #555;
+  font-size: 0.95rem;
 }
 
-.message-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 1rem;
+.status[hidden] {
+  display: none;
 }
 
-.message-card {
-  overflow: hidden;
+hr {
+  border: 0;
+  border-top: 1px solid #bdbdbd;
+  margin: 1.25rem 0;
 }
 
-.message-card img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-  background: #d9e2db;
+.message {
+  padding: 0.25rem 0 1rem;
 }
 
-.message-body {
-  padding: 1rem 1.15rem 1.2rem;
+.message + .message {
+  border-top: 1px solid #bdbdbd;
+  padding-top: 1rem;
 }
 
-.message-body p {
-  margin: 0;
+.message p {
+  margin: 0 0 0.65rem;
   white-space: pre-wrap;
-  line-height: 1.55;
+  word-break: break-word;
 }
 
-.message-meta {
-  margin-top: 0.75rem;
-  color: var(--muted);
-  font-size: 0.9rem;
+.message img {
+  display: block;
+  max-width: 320px;
+  width: 100%;
+  height: auto;
 }
 
 .empty {
-  padding: 1.5rem;
-  border: 1px dashed var(--line);
-  border-radius: var(--radius);
-  color: var(--muted);
-  text-align: center;
+  margin: 0;
+  color: #666;
 }
 
-@media (max-width: 640px) {
-  .page {
-    padding-top: 2rem;
-  }
-
-  .feed-head {
+@media (max-width: 560px) {
+  .field {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .field input[type="text"],
+  .field input[type="file"] {
+    width: 100%;
+  }
+
+  .message img {
+    max-width: 100%;
   }
 }

@@ -4,38 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>WeHelp Message Board</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Manrope:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
     <link rel="stylesheet" href="/static/styles.css" />
   </head>
   <body>
-    <main class="page">
-      <header class="hero">
-        <p class="eyebrow">WeHelp Backend Week 1</p>
-        <h1>圖文留言板</h1>
-        <p class="lede">寫下一段文字，附上一張圖片，立刻出現在列表裡。</p>
-      </header>
-
+    <main class="board">
       <section class="composer" aria-labelledby="composer-title">
-        <h2 id="composer-title">新增留言</h2>
+        <h1 id="composer-title">發表一篇圖文</h1>
         <form id="message-form">
-          <label class="field">
-            <span>內容</span>
-            <textarea
+          <div class="field">
+            <label for="content">文字內容</label>
+            <input
               id="content"
               name="content"
-              rows="4"
+              type="text"
               maxlength="1000"
-              placeholder="想說的話…"
+              placeholder="選擇一張圖片後送出"
               required
-            ></textarea>
-          </label>
-          <label class="field">
-            <span>圖片</span>
+            />
+          </div>
+          <div class="field">
+            <label for="image">圖片檔案</label>
             <input
               id="image"
               name="image"
@@ -43,18 +31,17 @@
               accept="image/jpeg,image/png,image/webp,image/gif"
               required
             />
-          </label>
+          </div>
           <p id="form-error" class="error" hidden></p>
-          <button type="submit" id="submit-btn">送出留言</button>
+          <button type="submit" id="submit-btn">送出</button>
         </form>
       </section>
 
-      <section class="feed" aria-labelledby="feed-title">
-        <div class="feed-head">
-          <h2 id="feed-title">留言列表</h2>
-          <p id="feed-status" class="muted">載入中…</p>
-        </div>
-        <ul id="message-list" class="message-list"></ul>
+      <hr />
+
+      <section class="feed" aria-label="留言列表">
+        <p id="feed-status" class="status">載入中…</p>
+        <div id="message-list"></div>
       </section>
     </main>
     <script src="/static/app.js" defer></script>

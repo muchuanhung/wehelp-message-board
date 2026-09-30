@@ -15,7 +15,7 @@ ALLOWED_CONTENT_TYPES = {
 }
 MAX_IMAGE_BYTES = 5 * 1024 * 1024
 
-
+# 根據上傳的檔案內容類型，返回對應的副檔名
 def _extension_for(upload: UploadFile) -> str:
     content_type = (upload.content_type or "").lower()
     if content_type in ALLOWED_CONTENT_TYPES:
@@ -29,6 +29,7 @@ def _extension_for(upload: UploadFile) -> str:
     raise HTTPException(status_code=400, detail="Only JPEG, PNG, WebP, or GIF images are allowed")
 
 
+# 上傳圖片到 S3
 def upload_image(upload: UploadFile) -> str:
     settings = get_settings()
     extension = _extension_for(upload)
