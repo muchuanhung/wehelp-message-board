@@ -41,15 +41,24 @@ function renderMessages(messages) {
   for (const message of messages) {
     const item = document.createElement("li");
     item.className = "message-card";
-    item.innerHTML = `
-      <img src="${message.image_url}" alt="留言圖片" loading="lazy" />
-      <div class="message-body">
-        <p></p>
-        <div class="message-meta"></div>
-      </div>
-    `;
-    item.querySelector("p").textContent = message.content;
-    item.querySelector(".message-meta").textContent = formatTime(message.created_at);
+
+    const img = document.createElement("img");
+    img.src = message.image_url;
+    img.alt = "留言圖片";
+    img.loading = "lazy";
+
+    const body = document.createElement("div");
+    body.className = "message-body";
+
+    const text = document.createElement("p");
+    text.textContent = message.content;
+
+    const meta = document.createElement("div");
+    meta.className = "message-meta";
+    meta.textContent = formatTime(message.created_at);
+
+    body.append(text, meta);
+    item.append(img, body);
     listEl.appendChild(item);
   }
 }
