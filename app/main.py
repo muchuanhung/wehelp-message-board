@@ -1,9 +1,10 @@
+import os
 from contextlib import asynccontextmanager
 from datetime import datetime
 from pathlib import Path
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
@@ -38,6 +39,17 @@ def health():
 @app.get("/")
 def index():
     return FileResponse(STATIC_DIR / "index.html")
+
+
+# Loader.io 網域驗證：GET /loaderio-<token>/、.txt、.html 需回傳 token 本身
+@app.get("/loaderio-{token}", include_in_schema=False)
+@app.get("/loaderio-{token}/", include_in_schema=False)
+def loaderio_verification(token: str):
+    expected = os.getenv("LOADERIO_TOKEN", "").removeprefix("loaderio-")
+    token = token.removesuffix(".txt").removesuffix(".html")
+    if not expected or token != expected:
+        raise HTTPException(status_code=404, detail="Not Found")
+    return PlainTextResponse(f"loaderio-{expected}")
 
 
 @app.get("/api/messages", response_model=list[MessageOut])
